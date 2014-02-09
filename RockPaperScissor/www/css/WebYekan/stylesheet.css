@@ -1,0 +1,8 @@
+@font-face {
+	font-family: 'WebYekan';
+	src: url('WebYekan.eot');
+	src: url('WebYekan.eot?#iefix') format('embedded-opentype'),
+		url('WebYekan.woff') format('woff'),
+		url('WebYekan.ttf') format('truetype'),
+		url('WebYekan.svg') format('svg');
+}

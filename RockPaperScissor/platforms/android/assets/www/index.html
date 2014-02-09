@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+
+<html>
+		<head>
+		<meta charset="utf-8" />
+		<meta name="format-detection" content="telephone=no" />
+		<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <style>
+		
+		</style>
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"  />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+		
+		<link type="text/css" href="css/themes/default/jquery.mobile-1.3.2.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="css/myCSS.css" />
+		<script src="js/jquery-1.10.2.min.js" ></script>
+		<script src="js/jquery.mobile-1.3.2.min.js"></script>
+		<script type="text/javascript" src="cordova.js"></script> 
+        
+		<script>
+		$.event.special.tap = {
+  setup: function() {
+    var self = this,
+      $self = $(self);
+
+    $self.on('touchstart', function(startEvent) {
+      var target = startEvent.target;
+
+      $self.one('touchend', function(endEvent) {
+        if (target == endEvent.target) {
+          $.event.simulate('tap', self, endEvent);
+        }
+      });
+    });
+  }
+};
+		</script>
+       
+		
+		</head>
+
+		<body>
+<div id="homepage" data-role="page">
+			<!--<div id="oneP" class="outerCircle"><div class="innerCircle buttonStyle"></div></div>
+            <div id="twoP" class="outerCircle"><div class="innerCircle2 buttonStyle"></div></div>-->
+            
+           <span id="chooseChar1">بازیکن اول</span>
+           <div id="char1select" class="chars" data-char="human"></div>
+        
+           <div class="btns">
+            	<!--<div class="prevBtn outerCircle"><div class="innerCircle2 buttonStyle"><-</div></div>-->
+           		 <div id="ok1" class="outerCircle"><div class="innerCircle2 buttonStyle"><span id="txtBtn">تایید</span></div></div>      
+            	<!--<div class="nxtBtn outerCircle"><div class="innerCircle2 buttonStyle">-></div></div>-->
+          </div>    
+          
+          <div class="mute"><img src="rockPaperScissor_elements/soundOn.png" width="26"></div>
+</div >
+<div id="char2page" data-role="page">
+			  
+           <span id="chooseChar2" >بازیکن دوم</span>
+           <div id="char2select" class="chars" data-char="human"></div>
+         
+            <div class="btns">
+            	<div class="prevBtn outerCircle"><div class="innerCircle2 buttonStyle"><-</div></div>
+           		<div id="ok2" class="outerCircle"><div class="innerCircle2 buttonStyle"><span id="txtBtn">تایید</span></div></div> 
+            	<div class="nxtBtn outerCircle"><div class="innerCircle2 buttonStyle">-></div></div>
+          </div>    
+          <div class="mute"><img src="rockPaperScissor_elements/soundOn.png" width="26"></div>
+</div>
+<div id="2player" data-role="page" class="_back_col2">
+          <div   class="_2pkey" id="_2pSCISSOR2"  data-value= "SCISSOR" ></div>
+         <div   class="_2pkey" id="_2pPAPER2"   data-value= "PAPER"   ></div>
+         <div   class="_2pkey" id="_2pROCK2"    data-value ="ROCK"     ></div>
+
+          <!--<input type="button" value="START" data-role="none" onClick="timer1()" style="position:fixed;top:40%;left:0;">-->
+          <li class="counter">
+          	<span class="ShowTime"></span>
+          </li>
+          <div class="_2pkey1" id="_2pROCK1"  data-id="_1pROCK1"    data-value ="ROCK"     ></div>
+          <div class="_2pkey1" id="_2pPAPER1" data-id="_1pPAPER1"   data-value= "PAPER"   ></div>
+          <div class="_2pkey1" id="_2pSCISSOR1" data-id="_1pSCISSOR1"  data-value= "SCISSOR" ></div>
+          
+          <div data-src="rockPaperScissor_elements/rock.png" id="img_rock" class="img_rock button_bottom"></div>
+          <div data-src="rockPaperScissor_elements/paper.png" id="img_paper" class="img_paper button_bottom"></div>
+          <div data-src="rockPaperScissor_elements/scissor.png" id="img_scissor" class="img_scissor button_bottom"></div>
+          <div data-src="rockPaperScissor_elements/paper2.png" id="img_paper2" class="img_paper2 button_top"></div> 
+          <div data-src="rockPaperScissor_elements/scissor2.png" id="img_scissor2" class="img_scissor2 button_top"></div> 
+          <div data-src="rockPaperScissor_elements/rock2.png" id="img_rock2" class="img_rock2 button_top"></div>
+       
+          <div class="p2stat">
+    		<div  class="pScore">0</div>
+          </div>
+          <div class="p1stat">
+   			 <span  class="pScore">0</span>
+          </div>
+          <span id="tap_state" style="-moz-user-select:none"></span>
+         
+        </div>
+<div id="1player" class="_back_col" data-role="page">
+          <div   class="_1pkey" id="_1pROCK1"    data-VALUE ="ROCK"     ></div>
+          <div   class="_1pkey" id="_1pPAPER1"   data-value= "PAPER"   ></div>
+          <div   class="_1pkey" id="_1pSCISSOR1"  data-value= "SCISSOR" ></div>
+          <div data-src="rockPaperScissor_elements/rock.png" id="img_rock"  class="img_rock button_bottom"></div>
+          <div data-src="rockPaperScissor_elements/paper.png" id="img_paper" class="img_paper button_bottom"></div>
+          <div data-src="rockPaperScissor_elements/scissor.png" id="img_scissor" class="img_scissor button_bottom"></div>
+          <div data-src="rockPaperScissor_elements/paper2.png" id="img_paper2" class="img_paper2 button_top"></div> 
+          <div data-src="rockPaperScissor_elements/scissor2.png" id="img_scissor2" class="img_scissor2 button_top"></div> 
+          <div data-src="rockPaperScissor_elements/rock2.png" id="img_rock2" class="img_rock2 button_top"></div>
+           <li class="counter">
+          	<span class="ShowTime"></span>
+          </li>
+          <div class="p2stat">
+    		<div  class="pScore">0</div>
+          </div>
+          <div class="p1stat">
+   			 <span  class="pScore">0</span>
+          </div>
+        </div> 
+      <div id="starting1p" data-role="page">
+       <div id="startBtn1p" class="outerCircle"><div class="innerCircle2 buttonStyle"><span id="txtBtn">start</span></div></div>  
+      	<span class="hint1">your time..</span>
+       
+      </div>
+      <div id="starting2p" data-role="page">
+       <div id="startBtn2p" class="outerCircle"><div class="innerCircle2 buttonStyle"><span id="txtBtn">start</span></div></div>  
+      	<span class="hint1">your time..</span>
+        <span id="hint2" >your time..</span>
+      </div>
+<script>
+	var settings={"gameTime":2500,"androidTime":1500,"matchPoint":5}
+	var charChart={'1':'human',
+					'2':'android'
+					}
+			
+	//$(document).on('onDeviceReady',function(){alert('im ready')})
+	$(document).on('deviceready',function(event){
+		
+		 var screenWidth=$(window).height();
+		//alert($(window).innerHeight());
+		$( document ).on( "pagecreate", "#homepage", function( event ) {
+  alert( "This page was just enhanced by jQuery Mobile!" );
+});
+
+
+$(window).resize(function() { 
+   alert($(window).height()); 
+   screenWidth=$(window).height(); 
+   $('#oneP,#twoP').css('width',$(window).width()/3);
+   $('#char1select').css('width',$(window).width()/2.5)
+   					.height($(window).width()/2.5);
+	$('#oneP,#twoP').height($(window).width()/3);
+	$('._1pkey').width($(window).width()/2.5).
+		height($(window).width()/2.5);
+});
+$('.counter').height($(window).height()/5).css('top',($(window).height()-$('.counter').height())/2);
+var lineheight=$('.counter').height();
+$('.ShowTime').css('line-height',lineheight+'px').css('width',$(window).height()/5).css('border-radius',$(window).height()/10);
+$('#ok1,#ok2').css('width',($(window).width()-60)/3).
+					height($('#ok2').width()).css({'margin-left':($(window).width()-$('#ok1').width())/2});
+$('.nxtBtn').css('width',($(window).width()-$('#ok1').width()-180)/2).
+					height(($('.nxtBtn').width())).css({'right':60,'top':($('#ok2').height()-$('.nxtBtn').height())/2});
+$('.prevBtn').css('width',($(window).width()-$('#ok1').width()-180)/2).
+					height(($('.prevBtn').width())).css({'left':60,'top':($('#ok2').height()-$('.prevBtn').height())/2});
+ $('#ok1').on('touchstart',function(){$.mobile.changePage('#char2page');});
+ $('#ok2').on('tap',function(){
+	 									if($('#char2select').attr('data-char')=='human')  $.mobile.changePage('#starting2p',{transition: "slide"})
+										else if($('#char2select').attr('data-char')=='android')  $.mobile.changePage('#starting1p',{transition: "slide"})
+									});
+document.addEventListener("backbutton", onBackKey, false);
+ $('#startBtn1p').on('tap',function(){
+	 	$.mobile.changePage('#1player');
+		$('.button_bottom,.button_top').css('display','none');
+		$('.button_bottom,.button_top').clearQueue().stop().css('top','');
+		show1();
+		timer_1();
+		setTimeout(function(){versus1(player1,systemChoice1);},settings.gameTime+2000);
+		setTimeout(function(){systemChoice();gameState=false;},settings.androidTime+2000);
+		});
+ $('#startBtn2p').on('tap',function(){
+	    $.mobile.changePage('#2player');
+		$('.button_bottom,.button_top').clearQueue().stop().css('top','');
+ 		show1();
+		timer_2();
+		setTimeout(function(){versus2(player1,player2);},settings.gameTime+2000);
+		setTimeout(function(){gameState=false;},settings.androidTime+2000);
+ });
+ function onBackKey() {
+	 if(window.location.hash=="" || window.location.hash=="#homepage"){
+		alert('we are gonna exit');
+		navigator.app.exitApp();
+		}
+	 else{
+		 //alert(window.location.hash);
+	 	$.mobile.changePage('#homepage');
+		$('.button_bottom,.button_top').clearQueue().stop().css('top','');
+        gameState=true;
+		p1wins=0;
+		p2wins=0;
+		$('.p1stat .pScore').html(p1wins);
+		$('.p2stat .pScore').html(p2wins);
+		clearTimeout(t1);
+		clearTimeout(t_1);
+	 }
+		
+ }
+$( "#chooseChar2" ).on( "swiperight", function(){$.mobile.changePage('#starting2p',{transition: "slide"})} );
+$('#innerCircle2').click(function(e) {
+                $(this).css({'height':'77px','border-bottom':'0px','transition':'all .2s ease-out','background-color':'#92E9BF'});
+				setTimeout(function(){ $('#innerCircle2').css({'height':'70px','border-bottom':'7px solid #92E9BF','transition':'all .2s ease-out','background-color':'#7FFFBE'});},200);})
+$('.nxtBtn').click(function(e) {
+    if($('#char2select').attr('data-char')!="android") $('#char2select').attr('data-char',"android");
+});
+$('.prevBtn').click(function(e) {
+    if($('#char2select').attr('data-char')=="android") $('#char2select').attr('data-char',"human");
+});
+
+
+		
+		//alert(screenWidth);
+		//alert($('#homepage').height());
+		$('html ,body').css('overflow','hidden');
+		
+		
+	var std_height=(screenWidth-100)/2;
+	var topRef;
+	var bottomRef;
+	if(std_height<=1011){
+		topRef=std_height-1011;
+	 	bottomRef=screenWidth-std_height;	}
+	else{
+		std_height=0;
+		bottomRef=$(window).height()-1011;
+		}
+$('#oneP,#twoP').css('width',$(window).width()/(5/3));
+$('#oneP,#twoP').height($(window).width()/(5/3));
+$('#char1select,#char2select').css('width',$(window).width()/(6/5))
+   					.height($(window).width()/(6/5)).css('margin-left',$(window).width()/(12));
+$('#oneP').on('touchstart',
+	function(){
+				$.mobile.changePage("#1player",{transition: "slide"})
+			});
+$('#twoP').on('touchstart',
+	function(){
+				$.mobile.changePage("#2player",{transition: "slide"})
+			});
+
+$('._1pkey,._2pkey,._2pkey1').width(($(window).width()-(6*15))/3).
+	height(($(window).width()-(6*15))/3); 
+var keyOffset=[$(window).height()-2*(($(window).width()-(6*15))/3)]/17;
+$('._1pkey').css('margin-top',16*keyOffset+(($(window).width()-(6*15))/3));
+$('._2pkey1').css('bottom',keyOffset);
+$('._2pkey').css('top',keyOffset);
+
+$('._2pkey1+._2pkey1').css({'left':($(window).width()-(6*15))/3+45});
+$('._2pkey+._2pkey').css({'left':($(window).width()-(6*15))/3+45});
+$('._2pkey1+._2pkey1+._2pkey1').css({'right':'30px','left':'auto'});
+$('._2pkey+._2pkey+._2pkey').css({'right':'30px','left':'auto'});
+$('.button_bottom,.button_top').each(function(index, element) {
+    $(this).css({'background-image':'url('+$(this).attr('data-src')+')','background-size':'contain','width':$(window).width()*1/5,
+				'left':$(window).width()*2/5});
+});
+				$('input').on('click',function(){timer1();});
+	
+			var src="/android_asset/www/opaque.mp3";
+	var media = new Media(src, mediaSuccess , onError);
+	function mediaSuccess(){
+		//alert('play again');
+		//alert(Media.MEDIA_STOPPED);
+	 	media.play();
+	}
+	 function onError(error) {
+            alert('code: '    + error.code    + '\n' +
+                  'message: ' + error.message + '\n');
+        }
+
+	media.play();
+	var Volume;
+	$('.mute img').on('touchstart',function(){
+		
+		
+		if(Volume==0) {media.setVolume(1.0) ;Volume=1;$(this).attr('src','rockPaperScissor_elements/soundOn.png')}
+		else {media.setVolume(0);Volume=0;$(this).attr('src','rockPaperScissor_elements/soundOff.png')}
+	
+
+	});
+	var pageHash;
+	$(document).on('pagechange',function(){
+		pageHash=window.location.hash;
+	$('#2player').on("pagebeforeshow",function(){
+			pageHash="#2player"
+			//alert(pageHash)
+	})
+	$('#1player').on("pagebeforeshow",function(){
+			pageHash="#1player"
+			//alert(pageHash)
+	})
+	//alert(pageHash);
+	
+		if(pageHash=="#2player"){
+			$('._2pkey,._2pkey1').touchstart(function(){
+				//$('#tap_state').append('tap!!!  '+$(this).attr('id'));
+				
+				//alert($(this).attr('id'));
+				if($(this).attr('data-id')=="_1pROCK1"){
+					routineRock1();
+					$('._2pkey1').fadeOut(110);
+				}
+				if($(this).attr('data-id')=="_1pPAPER1"){
+					routinePaper1();
+					$('._2pkey1').fadeOut(110);
+				}
+				if($(this).attr('data-id')=="_1pSCISSOR1"){
+					routineScissor1();
+					$('._2pkey1').fadeOut(110);
+				}
+				if($(this).attr('id')=="_2pROCK2"){
+					routineRock2();
+					$('._2pkey').fadeOut(110);
+				}
+				if($(this).attr('id')=="_2pPAPER2"){
+					routinePaper2();
+					$('._2pkey').fadeOut(110);
+				}
+				if($(this).attr('id')=="_2pSCISSOR2"){
+					routineScissor2();
+					$('._2pkey').fadeOut(110);
+				}
+				
+				});
+				$('.key').touchstart(function(event){
+					var thisON=$(this);
+					$(this).css('background-color','#b6a');
+					setTimeout(function(){thisON.css('background-color','#fff');},400);
+					
+					
+				});
+		}
+		if(pageHash=="#1player"){
+			$('._1pkey').touchstart(function(){
+				$('._1pkey').fadeOut(110);
+								//alert($(this).attr('id'));
+				if($(this).attr('id')=="_1pROCK1"){
+					routineRock1();
+				}
+				if($(this).attr('id')=="_1pPAPER1"){
+					routinePaper1();
+				}
+				if($(this).attr('id')=="_1pSCISSOR1"){
+					routineScissor1();
+				}
+				
+				});
+				
+		}
+		});
+	
+var player1="n",player2="n";
+var winner;
+var scoreP1=0,scoreP2=0;
+//___________________________________________________	
+function routineRock1()
+{
+	//alert("rock1");
+	player1="r";
+	$('.img_rock').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+}
+
+
+//___________________________________________________
+function routinePaper1()
+{
+	//alert("p1");
+	player1="p";	
+	$('.img_paper').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+}
+
+//___________________________________________________
+function routineScissor1()
+{
+	//alert("S1");
+	player1="s";
+	$('.img_scissor').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+	
+}
+
+//===================================================
+function routineRock2()
+{
+	//alert("rock1");
+	$('.img_rock2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+	player2="r";
+	
+}
+
+
+//___________________________________________________
+function routinePaper2()
+{
+	//alert("p1");
+	$('.img_paper2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+	player2="p";	
+	
+}
+
+//___________________________________________________
+function routineScissor2()
+{
+	//alert("S1");
+	$('.img_scissor2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+	player2="s";
+	
+}
+
+/*function show()
+{
+   //systemChoice();
+   
+	$('#p1stat .whichOne').html(player1);
+	$('#p1stat .whichOne').html(systemChoice1);
+    //alert (player1+","+systemChoice1);	
+	$('.button_bottom,.button_top').css('display','none');
+	//versus1(player1,systemChoice1);
+	
+}*/
+
+
+//==========================================================================
+/*
+function versus(p1C,p2C)// player1Choice,player2Choice
+{
+	$('.button_bottom,.button_top').clearQueue().stop().css('top','');
+	
+	
+	
+	if (p1C=="p" && p2C=="p"){
+		
+	$('#img_paper_2p').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		$('#img_paper2_2p').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		winner=0; // 0 as equal
+	}
+	else if (p1C=="s" && p2C=="s"){
+	$('#img_scissor_2p').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		$('#img_scissor2_2p').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		winner=0; // 0 as equal
+	}
+	else if (p1C=="r" && p2C=="r"){
+	$('#img_rock_2p').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		$('#img_rock2_2p').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		winner=0; // 0 as equal
+	}
+	
+	else if (p1C=="r" && p2C=="p"){
+		winner=2; // 1 as player 1 and 2 as player 2
+		$('#img_rock_2p').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		$('#img_paper2_2p').css('display','block').stop().clearQueue().animate({top:topRef},600);
+	}
+	else if (p1C=="r" && p2C=="s"){
+		winner=1;	
+		$('#img_rock_2p').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		$('#img_scissor2_2p').css('display','block').stop().clearQueue().animate({top:topRef},600);
+	}
+	else if (p1C=="p" && p2C=="r"){
+		winner=1;
+		$('#img_paper_2p').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		$('#img_rock2_2p').css('display','block').stop().clearQueue().animate({top:topRef},600);
+	}
+	else if (p1C=="p" && p2C=="s"){
+		$('#img_paper_2p').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		$('#img_scissor2_2p').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		winner=2;
+	}
+	else if (p1C=="s" && p2C=="r"){
+		$('#img_scissor_2p').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		$('#img_rock2_2p').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		winner=2;
+	}
+	else if (p1C=="s" && p2C=="p"){
+		$('#img_scissor_2p').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		$('#img_paper2_2p').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		winner=1;
+	}*/
+		
+	/*if (p1C==p2C)
+		winner=0; // 0 as equal
+	
+	else if (p1C=="r" && p2C=="p")
+		winner=2; // 1 as player 1 and 2 as player 2
+	
+	else if (p1C=="r" && p2C=="s")
+		winner=1;	
+		
+	else if (p1C=="p" && p2C=="r")
+		winner=1;
+	
+	else if (p1C=="p" && p2C=="s")
+		winner=2;
+		
+	else if (p1C=="s" && p2C=="r")
+		winner=2;
+		
+	else if (p1C=="s" && p2C=="p")
+		winner=1;
+		
+		
+	//alert("player"+winner+" win");	
+	//return winner;
+	
+	score(winner);
+	
+}
+
+
+		*/
+
+
+function score(winnerNo)
+{
+ if (winnerNo==1)
+ 	scoreP1++;
+ else if (winnerNo==2)
+	scoreP2++;	
+	
+ if (winnerNo!=0)
+	alert(" player "+ winnerNo+" WIN !!! \n player1="+scoreP1+" \n player2="+scoreP2)
+	
+	else
+	
+	alert(" equal  \n player1="+scoreP1+" \n player2="+scoreP2)
+	
+}
+
+
+//---------------------------------------------------------------------------------------
+
+function timer1()
+{
+ t1=setInterval(function(){counter1()},1000);
+ 
+ 
+ player1="n";//not assign
+ player2="n";//not assign
+ 
+ 		
+}
+var cntD=0;
+function timer_1()
+{
+	$('.ShowTime,.pScore').show();
+	$('.p1stat .pScore ').animate({bottom:''},800);
+ $('.p2stat .pScore').animate({top:''},800);
+ cntD=0;
+ $('.ShowTime').html("");
+ t_1=setInterval(function(){counter2()},500);
+ }
+ var cntD=0;
+ function counter2(){
+	 if(cntD<3){
+	 cntD++;
+	 $('.ShowTime').html(cntD);
+	 }
+	 else {
+		 $('.ShowTime,.pScore').hide();
+		 $('.ShowTime').html("Go");
+		  $('.p1stat .pScore').animate({bottom:'-50%'},800);
+		 $('.p2stat .pScore').animate({top:'-50%'},800);
+		 $('._1pkey').fadeIn(610);
+		clearInterval(t_1);
+	 }
+}
+function timer_2()
+{
+	$('.ShowTime,.pScore').show();
+	$('.p1stat .pScore ').animate({bottom:''},800);
+ $('.p2stat .pScore').animate({top:''},800);
+ cntD=0;
+ $('.ShowTime').html("");
+ 
+ t_1=setInterval(function(){counter2p()},500);
+ }
+ var cntD=0;
+ function counter2p(){
+	 if(cntD<3){
+	 cntD++;
+	 $('.ShowTime').html(cntD);
+	 }
+	 else {
+		 $('.ShowTime,.pScore').hide(900);
+		 $('.p1stat .pScore').animate({bottom:'-50%'},800);
+		 $('.p2stat .pScore').animate({top:'-50%'},800);
+		 
+		 $('.ShowTime').html("Go");
+		 $('._2pkey,._2pkey1').fadeIn(610);
+		clearInterval(t_1);
+	 }
+}
+
+function timer2()
+{
+ t2=setInterval(function(){checkAns()},2500);	
+	
+	
+}
+var cnt1=0;
+function counter1()
+{
+ cnt1++;
+ document.getElementsByClassName("ShowTime").innerHTML=cnt1;
+ 
+ 
+ if (cnt1==4){	
+ 	cnt1=0;
+ 	clearInterval(t1);
+	document.getElementsByClassName("ShowTime").innerHTML="go";
+	//document.getElementById("ROCK2").disabled=true;
+	//enableKeys();
+	timer2();
+ 	
+ }
+	
+	
+	
+}
+
+
+
+
+
+function checkAns()
+{
+	
+	clearInterval(t2);
+	
+
+if (player1=="n" && player2=="n")
+  	document.getElementById("ShowTime").innerHTML="both players sucks";
+	
+
+else if (player1=="n")
+  	document.getElementById("ShowTime").innerHTML="player1 sucks";
+	
+else if (player2=="n")
+  	document.getElementById("ShowTime").innerHTML="player2 sucks";
+		
+		
+else
+
+	 versus1(player1,player2);	
+	
+	
+	
+	
+}
+///////
+//___________________________________________________	
+function routineRock()
+{
+	
+	player1="r";
+}
+
+
+//___________________________________________________
+function routinePaper()
+{
+	//alert("p1");
+	player1="p";	
+	
+}
+
+//___________________________________________________
+function routineScissor()
+{
+	//alert("S1");
+	player1="s";
+	
+}
+
+function show1()
+{	
+    //alert (player1+","+systemChoice1);
+	$('._1pkey,._2pkey,._2pkey1').hide();	
+	//$('.button_bottom,.button_top').clearQueue().stop().css('top','').css('transition','all .6s');
+	$('.button_top').stop().clearQueue().animate({top:-1050},600);
+	$('.button_bottom').stop().clearQueue().animate({top:'100%'},600);
+	//$('.button_bottom,.button_top').css('display','none');
+	//versus1(player1,systemChoice1);
+	
+}
+function show2()
+{	
+    //alert (player1+","+systemChoice1);
+	$('._2pkey,._2pkey1').hide();	
+	//$('.button_bottom,.button_top').clearQueue().stop().css('top','').css('transition','all .6s');
+	$('.button_top').stop().clearQueue().animate({top:-1050},600);
+	$('.button_bottom').stop().clearQueue().animate({top:'100%'},600);
+	//$('.button_bottom,.button_top').css('display','none');
+	//versus1(player1,systemChoice1);
+	
+}
+//___________________________________________________
+var systemChoice1;
+function systemChoice()
+{
+	var rand1=Math.random();
+	
+	//alert(rand1);
+	
+    if ( rand1<=.333 ){
+		systemChoice1="r";
+		$('.img_rock2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+	}
+		
+	else if ( rand1>.333 &&  rand1<=.666){
+		systemChoice1="p";
+		$('.img_paper2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+	}
+	else {
+		systemChoice1="s";	
+		$('.img_scissor2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+	}
+}
+
+//==========================================================================
+var p1wins=0;
+var p2wins=0;
+var gameState=false;
+function versus1(p1C,p2C)// player1Choice,android_Choice
+{
+	$('._1pkey').css('display','none');
+	if(gameState==false){
+	//$('.button_bottom,.button_top').clearQueue().stop().css('top','');
+	
+	
+	
+	if (p1C=="p" && p2C=="p"){
+		
+		//$('#img_paper').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		//$('#img_paper2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		winner=0; // 0 as equal
+	}
+	else if (p1C=="s" && p2C=="s"){
+		//$('#img_scissor').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		//$('#img_scissor2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		winner=0; // 0 as equal
+	}
+	else if (p1C=="r" && p2C=="r"){
+		//$('#img_rock').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		//$('#img_rock2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		winner=0; // 0 as equal
+	}
+	
+	else if (p1C=="r" && p2C=="p"){
+		winner=2; // 1 as player 1 and 2 as player 2
+		//$('#img_rock').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		//$('#img_paper2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		p2wins++;
+		//alert('YOU: '+p1wins+'  <br>   he: '+p2wins)
+	}
+	else if (p1C=="r" && p2C=="s"){
+		winner=1;	
+		//$('#img_rock').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		//$('#img_scissor2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+	    p1wins++;
+		//alert('YOU: '+p1wins+'  <br>   he: '+p2wins)
+	}
+	else if (p1C=="p" && p2C=="r"){
+		winner=1;
+		//$('#img_paper').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		//$('#img_rock2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+        p1wins++;
+		//alert('YOU: '+p1wins+'  <br>   he: '+p2wins)	
+	}
+	else if (p1C=="p" && p2C=="s"){
+		//$('#img_paper').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		//$('#img_scissor2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		winner=2;
+		p2wins++;
+		//alert('YOU: '+p1wins+'  <br>   he: '+p2wins)
+	}
+	else if (p1C=="s" && p2C=="r"){
+		//$('#img_scissor').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		//$('#img_rock2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		winner=2;
+		p2wins++;
+		//alert('YOU: '+p1wins+'  <br>   he: '+p2wins)
+	}
+	else if (p1C=="s" && p2C=="p"){
+		//$('#img_scissor').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		//$('#img_paper2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		winner=1;
+		p1wins++;
+		//alert('YOU: '+p1wins+'  <br>   he: '+p2wins)
+	}
+	if (p1C==""){
+		//$('#img_scissor').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		//$('#img_paper2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		winner=2;
+		p2wins++;
+		alert('YOU: Did not moved!!')
+	}
+	if(p1wins==settings.matchPoint || p2wins==settings.matchPoint) gameEnd();
+		
+	//alert("player"+winner+" win");	
+	//return winner;
+	
+	score1(winner);
+	setTimeout(function(){
+		show1();
+		timer_1();
+		setTimeout(function(){systemChoice();},settings.androidTime+2000);
+		setTimeout(function(){versus1(player1,systemChoice1);},settings.gameTime+2000);
+	},500)
+	}
+	player1="";
+	player2="";
+}
+
+
+function gameEnd(){
+		gameState=true;
+		$('.button_top').stop().clearQueue().animate({top:-1050},600);
+	$('.button_bottom').stop().clearQueue().animate({top:'100%'},600);
+		if(p1wins>p2wins) alert('gameOver , YOU WON!!');
+		else alert('gameOver , YOU losed!!');
+		p1wins=0;
+		p2wins=0;
+		$('.p1stat .pScore').html(p1wins);
+		$('.p2stat .pScore').html(p2wins);
+		$.mobile.changePage('#homepage');
+		
+	}
+
+function score1(winnerNo)
+{
+ if (winnerNo==1){
+ 	//scoreP1++;
+	$('.p1stat .pScore').html(p1wins);
+ }
+ else if (winnerNo==2){
+	//scoreP2++;	
+	$('.p2stat .pScore').html(p2wins);
+ }
+	
+ /*if (winnerNo!=0)
+	alert(" player "+ winnerNo+" WIN !!! \n player1="+scoreP1+" \n android_="+scoreP2)
+	
+	else
+	
+	alert(" equal  \n player1="+scoreP1+" \n android_="+scoreP2)
+*/	
+}
+
+function versus2(p1C,p2C)// player1Choice,android_Choice
+{
+	$('._2pkey,._2pkey1').css('display','none');
+	if(gameState==false){
+	//$('.button_bottom,.button_top').clearQueue().stop().css('top','');
+	
+	
+	
+	if (p1C=="p" && p2C=="p"){
+		
+		//$('#img_paper').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		//$('#img_paper2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		winner=0; // 0 as equal
+	}
+	else if (p1C=="s" && p2C=="s"){
+		//$('#img_scissor').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		//$('#img_scissor2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		winner=0; // 0 as equal
+	}
+	else if (p1C=="r" && p2C=="r"){
+		//$('#img_rock').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		//$('#img_rock2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		winner=0; // 0 as equal
+	}
+	
+	else if (p1C=="r" && p2C=="p"){
+		winner=2; // 1 as player 1 and 2 as player 2
+		//$('#img_rock').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		//$('#img_paper2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		p2wins++;
+		//alert('YOU: '+p1wins+'  <br>   he: '+p2wins)
+	}
+	else if (p1C=="r" && p2C=="s"){
+		winner=1;	
+		//$('#img_rock').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		//$('#img_scissor2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+	    p1wins++;
+		//alert('YOU: '+p1wins+'  <br>   he: '+p2wins)
+	}
+	else if (p1C=="p" && p2C=="r"){
+		winner=1;
+		//$('#img_paper').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		//$('#img_rock2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+        p1wins++;
+		//alert('YOU: '+p1wins+'  <br>   he: '+p2wins)	
+	}
+	else if (p1C=="p" && p2C=="s"){
+		//$('#img_paper').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		//$('#img_scissor2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		winner=2;
+		p2wins++;
+		//alert('YOU: '+p1wins+'  <br>   he: '+p2wins)
+	}
+	else if (p1C=="s" && p2C=="r"){
+		//$('#img_scissor').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		//$('#img_rock2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		winner=2;
+		p2wins++;
+		//alert('YOU: '+p1wins+'  <br>   he: '+p2wins)
+	}
+	else if (p1C=="s" && p2C=="p"){
+		//$('#img_scissor').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		//$('#img_paper2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		winner=1;
+		p1wins++;
+		//alert('YOU: '+p1wins+'  <br>   he: '+p2wins)
+	}
+	if (p2C=="" && p1C==""){winner="";alert('no One did not won')}
+	else if (p1C==""){
+		//$('#img_scissor').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		//$('#img_paper2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		winner=2;
+		p2wins++;
+		alert('P1, Did not moved!!')
+		
+	}
+	else if (p2C==""){
+		//$('#img_scissor').css('display','block').stop().clearQueue().animate({top:bottomRef},600);
+		//$('#img_paper2').css('display','block').stop().clearQueue().animate({top:topRef},600);
+		winner=1;
+		p1wins++;
+		alert('P2, Did not moved!!')
+	}
+	
+	if(p1wins==settings.matchPoint || p2wins==settings.matchPoint) gameEnd();
+		
+	//alert("player"+winner+" win");	
+	//return winner;
+	
+	score1(winner);
+	setTimeout(function(){
+		show2();
+		timer_2();
+		setTimeout(function(){versus2(player1,player2);},settings.gameTime+2000);
+	},500)
+	}
+	player1="";
+	player2="";
+}
+
+});	
+</script>
+</body>
+</html>

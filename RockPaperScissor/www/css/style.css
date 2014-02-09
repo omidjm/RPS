@@ -1,0 +1,270 @@
+/* Vertical Accordion Style */
+.va-container{
+	position:relative;
+	margin:40px auto 0 auto;
+}
+.va-wrapper{
+	width:100%;
+	height:100%;
+	position:relative;
+	overflow:hidden;
+	background:#000;
+}
+.va-slice{
+	cursor:pointer;
+	position:absolute;
+	clip: rect(0,auto,auto,0);
+	width:100%;
+	left:0px;
+	overflow:hidden;
+	border: 4px solid white;
+	border-left: 0px;
+	border-right: 0px;
+}
+.va-slice-color-1{
+	background-image: url(../images/1-grayscale.jpg);
+background-size: cover;
+background-position: 0 50%;
+}
+.va-slice-color-2{
+	background-image: url(../images/2-grayscal.jpg);
+background-size: cover;
+background-position: 0 50%;
+}
+.va-slice-color-3{
+	background-image: url(../images/3-grayscal.jpg);
+background-size: cover;
+background-position: 0 50%;
+}
+.va-slice-color-4{
+	background-image: url(../images/4-grayscal.jpg);
+background-size: cover;
+background-position: 0 50%;
+}
+.va-slice-color-5{
+	background-image: url(../images/5-grayscal.jpg);
+background-size: cover;
+background-position: 0 50%;
+}
+.va-slice-color-6{
+	background-image: url(../images/1.jpg);
+background-size: cover;
+background-position: 0 50%;
+}
+.va-slice-color-7{
+	background-image: url(../images/1.jpg);
+background-size: cover;
+background-position: 0 50%;
+}
+.va-slice-color-1:hover {
+    background-image: url(../images/1.jpg);
+    transition: background-image .7s;
+	-moz-transition: background-image 1.7s;
+}
+.va-slice-color-2:hover {
+    background-image: url(../images/2.jpg);
+    transition: background-image .7s;
+}
+.va-slice-color-3:hover {
+    background-image: url(../images/3.jpg);
+    transition: background-image .7s;
+}
+.va-slice-color-4:hover {
+    background-image: url(../images/4.jpg);
+    transition: background-image .7s;
+}
+.va-slice-color-5:hover {
+    background-image: url(../images/5.jpg);
+    transition: background-image .7s;
+}
+.va-slice-color-1{
+	background-color:#97c5eb;
+}
+.va-slice-color-2{
+	background-color:#68ace5;
+}
+.va-slice-color-3{
+	background-color:#0072cf;
+}
+.va-slice-color-4{
+	background-color:#0039a6;
+}
+.va-slice-color-5{
+	background-color:#00338e;
+}
+.va-slice-color-6{
+	background-color:#002c76;
+}
+.va-slice-color-7{
+	background-color:#002144;
+}
+.va-title{
+	background-color: rgba(133, 175, 201, 0.7);
+	width: 37%;
+	font-family: 'Open Sans Condensed', sans-serif;
+	text-transform:uppercase;
+	font-size:60px;
+	margin-left:20px;
+	color:#fff;
+	text-shadow: 0px 0px 1px white;
+}
+.va-content{
+	display:none;
+	margin-left:25px;
+}
+.va-slice p{
+	font-size: 22px;
+	font-style: italic;
+	font-family:Georgia, serif;
+}
+.va-slice ul{
+	margin-top:20px;
+}
+.va-slice ul li{
+	float:left;
+	margin:0px 2px;
+}
+.va-slice ul li a{
+	color:#000;
+	background:#eede2f;
+	padding:3px 6px;
+	font-size:14px;
+	font-family:'PT Sans', sans-serif;
+	text-transform:uppercase;
+}
+.va-slice ul li a:hover{
+	background:#000;
+	color:#fff;
+	text-shadow:none;
+}
+.va-nav span{
+	width:40px;
+	height:25px;
+	background:transparent url(../images/prev.png) no-repeat center center;
+	position:absolute;
+	top:-35px;
+	left:50%;
+	margin-left:-20px;
+	text-indent:-9000px;
+	opacity:0.7;
+	cursor:pointer;
+	display:none;
+	z-index:100;
+}
+.va-nav span.va-nav-next{
+	background-image:url(../images/next.png);
+	top:auto;
+	bottom:-35px;
+}
+.va-nav span:hover{
+	opacity:1.0;
+}
+* {
+	font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+#banner_img {
+    margin-top: -14%;
+}
+#menubar li {
+    float: left;
+    padding: 20px;
+}
+#contact {
+    padding-top: 72px;
+}
+#form_area {
+    text-align: center;
+    background-color: #8ac8bc;
+    padding: 36px;
+    padding-bottom: 85px !important;
+}
+#contact input,#contact textarea {
+    border: none;
+}
+#contact input:first-of-type,#contact input:nth-of-type(2) {
+    width: 169px;
+}
+#comment {
+    width: 361px;
+    margin-top: 3px;
+    height: 100px;
+    resize: none;
+}
+input[type="submit"] {
+    width: 81.5px;
+}
+.captions {
+    font-size: 33px;
+    display: block;
+    padding: 11px;
+}
+form {
+    text-align: left;
+    /* width: 30%; */
+    /* margin-left: 36%; */
+    display: inline-block;
+}
+#form_area span {
+    color: white;
+    font-size: 18px;
+    display: block;
+    padding: 25px;
+}
+#subscription {
+    text-align: center;
+    background-color: #787474;
+    padding: 67px;
+}
+#subscription #email {
+    padding-left: 8px;
+    ing-top: -10px;
+    width: 334px;
+    font-size: 25px;
+}
+#subscription input {
+    height: 64px;
+    padding: 0;
+}
+#subscription input[type="submit"] {
+    /* height: 35px; */
+    position: relative;
+    background-color: #353535;
+    color: white;
+    border-top: 5px solid black;
+    top: -1px;
+}
+#subscription #email::-webkit-input-placeholder {
+    font-size: 22px;
+}
+.va-slice:nth-of-type(1) .va-title {
+    margin-left: 40px;
+}
+.va-slice:nth-of-type(2) .va-title {
+    margin-left: 616px;
+}.va-slice:nth-of-type(3) .va-title {
+    margin-left: 480px;
+}.va-slice:nth-of-type(4) .va-title {
+    width: 581px;
+    margin-left: 280px;
+}.va-slice:nth-of-type(5) .va-title {
+    width: 622px;
+    margin-left: 600px;
+}
+.container .captions {
+    clear: both;
+}
+#logo {
+    width: 18% !important;
+    position: absolute;
+    left: 41%;
+    top: 41%;
+}
+#msg_status {
+	left:-20%;
+	opacity:0;
+    position: absolute;
+    font-size: 76px !important;
+}
+/*--------------------------*/
